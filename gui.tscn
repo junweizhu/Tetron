@@ -1,0 +1,170 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5uofwc6kbl3i"]
+
+[ext_resource type="Texture2D" uid="uid://bpopusgg017hf" path="res://tile.png" id="1_7ulsb"]
+[ext_resource type="Script" path="res://gui.gd" id="1_mn5q7"]
+
+[node name="GUI" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mn5q7")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Left" type="CenterContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="PanelContainer/HBoxContainer/Left"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Statistics" type="GridContainer" parent="PanelContainer/HBoxContainer/Left/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="_HighScore" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/Statistics"]
+layout_mode = 2
+text = "High score"
+
+[node name="HighScore" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/Statistics"]
+layout_mode = 2
+text = "8888888"
+
+[node name="_Level" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/Statistics"]
+layout_mode = 2
+text = "Level
+"
+
+[node name="Level" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/Statistics"]
+layout_mode = 2
+text = "1"
+
+[node name="_Score" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/Statistics"]
+layout_mode = 2
+text = "Score"
+
+[node name="Label6" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/Statistics"]
+layout_mode = 2
+text = "0"
+
+[node name="_Lines" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/Statistics"]
+layout_mode = 2
+text = "Lines"
+
+[node name="Lines" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/Statistics"]
+layout_mode = 2
+text = "0"
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/HBoxContainer/Left/VBox"]
+layout_mode = 2
+
+[node name="Next" type="GridContainer" parent="PanelContainer/HBoxContainer/Left/VBox/CenterContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 2
+
+[node name="Cell" type="TextureRect" parent="PanelContainer/HBoxContainer/Left/VBox/CenterContainer/Next"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell2" type="TextureRect" parent="PanelContainer/HBoxContainer/Left/VBox/CenterContainer/Next"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell3" type="TextureRect" parent="PanelContainer/HBoxContainer/Left/VBox/CenterContainer/Next"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell4" type="TextureRect" parent="PanelContainer/HBoxContainer/Left/VBox/CenterContainer/Next"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell5" type="TextureRect" parent="PanelContainer/HBoxContainer/Left/VBox/CenterContainer/Next"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell6" type="TextureRect" parent="PanelContainer/HBoxContainer/Left/VBox/CenterContainer/Next"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell7" type="TextureRect" parent="PanelContainer/HBoxContainer/Left/VBox/CenterContainer/Next"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell8" type="TextureRect" parent="PanelContainer/HBoxContainer/Left/VBox/CenterContainer/Next"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="NewGame" type="Button" parent="PanelContainer/HBoxContainer/Left/VBox"]
+layout_mode = 2
+text = "New Game"
+
+[node name="Pause" type="Button" parent="PanelContainer/HBoxContainer/Left/VBox"]
+layout_mode = 2
+text = "Pause"
+
+[node name="Music" type="Button" parent="PanelContainer/HBoxContainer/Left/VBox"]
+layout_mode = 2
+text = "Music On/off"
+
+[node name="About" type="Button" parent="PanelContainer/HBoxContainer/Left/VBox"]
+layout_mode = 2
+text = "About"
+
+[node name="Right" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Grid" type="GridContainer" parent="PanelContainer/HBoxContainer/Right"]
+layout_mode = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 10
+
+[node name="Cell" type="TextureRect" parent="PanelContainer/HBoxContainer/Right/Grid"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell2" type="TextureRect" parent="PanelContainer/HBoxContainer/Right/Grid"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell3" type="TextureRect" parent="PanelContainer/HBoxContainer/Right/Grid"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="Cell4" type="TextureRect" parent="PanelContainer/HBoxContainer/Right/Grid"]
+layout_mode = 2
+texture = ExtResource("1_7ulsb")
+
+[node name="AboutBox" type="AcceptDialog" parent="."]
+title = "Tetron"
+position = Vector2i(0, 36)
+size = Vector2i(315, 239)
+dialog_text = "Space bar - Hard drop
+Down arrow - soft drop
+Left arrow - move left
+Right arrow - move right
+Up arrow - rotate clockwise
+shift + Up arrow - rotate anti-clockwise
+Page Up - increase level on each press"
+
+[connection signal="button_down" from="PanelContainer/HBoxContainer/Left/VBox/NewGame" to="." method="_on_new_game_button_down"]
+[connection signal="button_down" from="PanelContainer/HBoxContainer/Left/VBox/Pause" to="." method="_on_pause_button_down"]
+[connection signal="button_down" from="PanelContainer/HBoxContainer/Left/VBox/Music" to="." method="_on_music_button_down"]
+[connection signal="button_down" from="PanelContainer/HBoxContainer/Left/VBox/About" to="." method="_on_about_button_down"]
