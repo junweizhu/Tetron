@@ -12,3 +12,5 @@ script = ExtResource("1_7q80q")
 
 [node name="GUI" parent="." instance=ExtResource("2_gkr4i")]
 layout_mode = 2
+
+[node name="Ticker" type="Timer" parent="."]
