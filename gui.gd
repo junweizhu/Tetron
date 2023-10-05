@@ -45,6 +45,7 @@ func settings(data):
 	find_child("Music").value=data.music
 	find_child("Sound").value=data.sound
 
+
 func _ready():
 	
 	grid = find_child("Grid")
@@ -53,8 +54,18 @@ func _ready():
 	find_child("Sound").set_min(min_vol)
 	add_cells(grid, 200)
 	clear_all_cells()
-	
-	
+
+
+func set_next_shape(shape: ShapeData):
+	clear_cells(next)
+	var i =0
+	for col in shape.coors.size():
+		for row in [0,1]:
+			if shape.grid[row][col]:
+				next.get_child(i).modulate=shape.color
+			i+=1
+
+
 func add_cells(node, n):
 	var num_cells=node.get_child_count()
 	while num_cells<n:
