@@ -18,4 +18,10 @@ layout_mode = 2
 
 [node name="Ticker" type="Timer" parent="."]
 
+[node name="LeftTimer" type="Timer" parent="."]
+
+[node name="RightTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="Ticker" to="." method="_on_ticker_timeout"]
+[connection signal="timeout" from="LeftTimer" to="." method="_on_left_timer_timeout"]
+[connection signal="timeout" from="RightTimer" to="." method="_on_right_timer_timeout"]
