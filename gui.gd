@@ -6,9 +6,44 @@ var music =0
 var sound =0
 var min_vol
 
+var level =1 : set=set_level
+var score =0 : set=set_score
+var high_score=0 : set=set_high_score
+var lines=0 : set=set_lines
 
 
 signal button_pressed(button_name)
+
+func set_level(value):
+	find_child("Level").text=str(value)
+	level=value
+
+
+func set_score(value):
+	find_child("Score").text=str(value)
+	score=value
+
+
+func set_high_score(value):
+	find_child("HighScore").text="%08d" % value
+	high_score=value
+
+
+func set_lines(value):
+	find_child("Lines").text = str(value)
+	lines=value
+
+func reset_stats(_high_score=0, _score=0, _lines=0, _level=1):
+	self.high_score=_high_score
+	self.score=_score
+	self.lines=_lines
+	self.level=_level
+
+
+func settings(data):
+	self.high_score=data.high_score
+	find_child("Music").value=data.music
+	find_child("Sound").value=data.sound
 
 func _ready():
 	
