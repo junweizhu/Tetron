@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhum2woae5dac"]
+[gd_scene load_steps=3 format=3 uid="uid://bhum2woae5dac"]
 
 [ext_resource type="Texture2D" uid="uid://bpopusgg017hf" path="res://tile.png" id="1_23dcu"]
+[ext_resource type="Script" path="res://shapes.gd" id="1_w0rsh"]
 
 [node name="Shapes" type="GridContainer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,6 +13,7 @@ grow_vertical = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 3
+script = ExtResource("1_w0rsh")
 
 [node name="L" type="GridContainer" parent="."]
 modulate = Color(0.870588, 0.509804, 0, 1)

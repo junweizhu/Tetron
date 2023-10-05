@@ -8,13 +8,11 @@ var coors: Array
 var cells : GridContainer
 
 func rotate_left():
-	cells.get_parent().rotate(-PI/2)
-	_rotate_grid(1,-1)
+	_rotate_grid(-1,1)
 
 
 func rotate_right():
-	cells.get_parent().rotate(PI/2)
-	_rotate_grid(-1,1)
+	_rotate_grid(1,-1)
 
 
 func _rotate_grid(sign_of_x, sign_of_y):

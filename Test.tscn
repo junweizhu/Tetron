@@ -1,0 +1,95 @@
+[gd_scene load_steps=3 format=3 uid="uid://cytl6gmwwh2f2"]
+
+[ext_resource type="Script" path="res://Test.gd" id="1_7y5pr"]
+[ext_resource type="PackedScene" uid="uid://cocait7qpntde" path="res://main.tscn" id="2_edpqn"]
+
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7y5pr")
+
+[node name="Main" parent="." instance=ExtResource("2_edpqn")]
+layout_mode = 0
+
+[node name="Shape" type="Label" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 23.0
+offset_right = 290.0
+offset_bottom = 46.0
+
+[node name="Grid" type="Label" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 139.0
+offset_right = 290.0
+offset_bottom = 162.0
+
+[node name="PickShape" type="Button" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 23.0
+offset_right = 136.0
+offset_bottom = 54.0
+text = "Pick a Shape"
+
+[node name="RotateLeft" type="Button" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 83.0
+offset_right = 125.0
+offset_bottom = 114.0
+text = "Rotate Left"
+
+[node name="RotateRight" type="Button" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 139.0
+offset_right = 135.0
+offset_bottom = 170.0
+text = "Rotate Right"
+
+[node name="AddShapeToGrid" type="Button" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 201.0
+offset_right = 182.0
+offset_bottom = 232.0
+text = "Add Shape To Grid"
+
+[node name="RemoveShapeFromGrid" type="Button" parent="."]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 201.0
+offset_right = 405.0
+offset_bottom = 232.0
+text = "Remove Shape from Grid"
+
+[node name="Lock" type="Button" parent="."]
+layout_mode = 2
+offset_left = 429.0
+offset_top = 201.0
+offset_right = 473.0
+offset_bottom = 232.0
+text = "Lock"
+
+[node name="SpinBox" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 201.0
+offset_right = 584.063
+offset_bottom = 232.0
+min_value = -10.0
+max_value = 210.0
+value = 35.0
+
+[connection signal="button_down" from="PickShape" to="." method="_on_pick_shape_button_down"]
+[connection signal="button_down" from="RotateLeft" to="." method="_on_rotate_left_button_down"]
+[connection signal="button_down" from="RotateRight" to="." method="_on_rotate_right_button_down"]
+[connection signal="button_down" from="AddShapeToGrid" to="." method="_on_add_shape_to_grid_button_down"]
+[connection signal="button_down" from="RemoveShapeFromGrid" to="." method="_on_remove_shape_from_grid_button_down"]
+[connection signal="button_down" from="Lock" to="." method="_on_lock_button_down"]

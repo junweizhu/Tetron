@@ -7,6 +7,7 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -224.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mn5q7")
@@ -115,9 +116,31 @@ text = "New Game"
 layout_mode = 2
 text = "Pause"
 
-[node name="Music" type="Button" parent="PanelContainer/HBoxContainer/Left/VBox"]
+[node name="HBox2" type="HBoxContainer" parent="PanelContainer/HBoxContainer/Left/VBox"]
 layout_mode = 2
-text = "Music On/off"
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/HBox2"]
+layout_mode = 2
+text = "Music"
+
+[node name="Music" type="HSlider" parent="PanelContainer/HBoxContainer/Left/VBox/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -24.0
+max_value = 0.0
+
+[node name="HBox" type="HBoxContainer" parent="PanelContainer/HBoxContainer/Left/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/Left/VBox/HBox"]
+layout_mode = 2
+text = "Sound"
+
+[node name="Sound" type="HSlider" parent="PanelContainer/HBoxContainer/Left/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -24.0
+max_value = 0.0
 
 [node name="About" type="Button" parent="PanelContainer/HBoxContainer/Left/VBox"]
 layout_mode = 2
@@ -129,6 +152,10 @@ theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/HBoxContainer/Right"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Grid" type="GridContainer" parent="PanelContainer/HBoxContainer/Right"]
 layout_mode = 2
@@ -166,5 +193,7 @@ Page Up - increase level on each press"
 
 [connection signal="button_down" from="PanelContainer/HBoxContainer/Left/VBox/NewGame" to="." method="_on_new_game_button_down"]
 [connection signal="button_down" from="PanelContainer/HBoxContainer/Left/VBox/Pause" to="." method="_on_pause_button_down"]
-[connection signal="button_down" from="PanelContainer/HBoxContainer/Left/VBox/Music" to="." method="_on_music_button_down"]
+[connection signal="value_changed" from="PanelContainer/HBoxContainer/Left/VBox/HBox2/Music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="PanelContainer/HBoxContainer/Left/VBox/HBox/Sound" to="." method="_on_sound_value_changed"]
 [connection signal="button_down" from="PanelContainer/HBoxContainer/Left/VBox/About" to="." method="_on_about_button_down"]
+[connection signal="visibility_changed" from="AboutBox" to="." method="_on_about_box_visibility_changed"]

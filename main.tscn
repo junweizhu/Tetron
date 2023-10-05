@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://cocait7qpntde"]
+[gd_scene load_steps=3 format=3 uid="uid://cocait7qpntde"]
 
-[node name="Main" type="Node2D"]
+[ext_resource type="Script" path="res://main.gd" id="1_7q80q"]
+[ext_resource type="PackedScene" uid="uid://b5uofwc6kbl3i" path="res://gui.tscn" id="2_gkr4i"]
+
+[node name="Main" type="CenterContainer"]
+offset_right = 600.0
+offset_bottom = 1024.0
+script = ExtResource("1_7q80q")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="GUI" parent="." instance=ExtResource("2_gkr4i")]
+layout_mode = 2
