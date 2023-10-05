@@ -12,6 +12,7 @@ const TICK_SPEED = 1.0
 const FAST_MULTIPLE=10
 const WAIT_TIME=0.15
 const REPEAT_DELAY =0.05
+const FILE_NAME = "user://tetron.json"
 
 var gui
 var state = STOPPED
@@ -31,6 +32,7 @@ func _ready():
 	gui.set_button_states(ENABLED)
 	cols = gui.grid.get_columns()
 	gui.reset_stats()
+	load_game()
 	randomize()
 
 
@@ -128,7 +130,10 @@ func _button_pressed(button_name):
 					_music(STOP)
 		"Sound":
 			if _sound_is_on():
+				$SoundPlayer.volume_db = gui.sound
 				print("Changed sound setting")
+			else:
+				print("Sound off")
 		"About":
 			gui.set_button_state("About", DISABLED)
 
@@ -216,10 +221,15 @@ func hard_drop():
 
 func _game_over():
 	$Ticker.stop()
+	$LeftTimer.stop()
+	$RightTimer.stop()
 	gui.set_button_states(ENABLED)
 	if _music_is_on():
 		_music(STOP)
+	if _sound_is_on():
+		$SoundPlayer.play()
 	state = STOPPED
+	save_game()
 	print ("Game Over")
 
 
@@ -267,6 +277,7 @@ func _on_ticker_timeout():
 	var new_pos =pos+cols
 	if move_shape(new_pos):
 		gui.score+=bonus
+		update_high_score()
 	else:
 		if new_pos<= END_POS:
 			_game_over()
@@ -278,43 +289,51 @@ func _on_ticker_timeout():
 func check_rows():
 	var i=grid.size()-1
 	var x=0
-	var rows=0
+	var row_number = grid.size() / cols - 1
+	var rows=[]
 	while i>=0:
 		if grid[i]:
 			x+=1
 			i-=1
 			if x==cols:
-				rows +=1
+				rows.append(row_number)
 				x=0
+				row_number-=1
 		else:
 			i+=x
 			x=0
-			if rows>0:
-				remove_rows(i,rows)
-			rows=0
-			i-= cols
+			i-=cols
+			row_number-=1
+			
+	if rows.is_empty()==false:
+		remove_rows(rows)
 
 
-func remove_rows(i, rows):
-	add_to_score(rows)
-	print("Rows: %d" % rows)
-	var num_cells = rows* cols
+func remove_rows(rows):
+	var rows_moved=0
+	add_to_score(rows.size())
 	#hide cells
-	for n in num_cells:
-		gui.grid.get_child(i+n+1).modulate=Color(0)
 	pause()
+	if _sound_is_on():
+		$SoundPlayer.play()
 	await get_tree().create_timer(0.3).timeout
 	pause(false)
+	remove_shape_from_grid()
+	for row_count in rows.size():
+		#hide cells
+		for n in cols:
+			gui.grid.get_child((rows[row_count]+rows_moved)*cols+n).modulate=Color(0)
 	#move cells
-	var to=i+num_cells
-	while i>=0:
-		grid[to]=grid[i]
-		gui.grid.get_child(to).modulate=gui.grid.get_child(i).modulate
-		if i==0:
-			grid[i]=false
-			gui.grid.get_child(i).modulate=Color(0)
-		i -=1
-		to -=1
+		var to=(rows[row_count]+rows_moved)*cols+cols-1
+		var from= to-cols
+		while from>=0:
+			grid[to]=grid[from]
+			gui.grid.get_child(to).modulate=gui.grid.get_child(from).modulate
+			if from==0:
+				grid[from]=false
+				gui.grid.get_child(from).modulate=Color(0)
+			from -=1
+			to -=1
 
 func pause(value = true):
 	get_tree().paused = value
@@ -328,3 +347,22 @@ func _on_left_timer_timeout():
 func _on_right_timer_timeout():
 	$RightTimer.wait_time=REPEAT_DELAY
 	move_right()
+
+func save_game():
+	var data={
+		"music" : gui.music,
+		"sound" : gui.sound,
+		"high_score" : gui.high_score
+	}
+	var file=FileAccess.open(FILE_NAME, FileAccess.WRITE)
+	file.store_string(JSON.stringify(data))
+	file.close()
+	print("saved")
+
+func load_game():
+	if FileAccess.file_exists(FILE_NAME):
+		var file=FileAccess.open(FILE_NAME, FileAccess.READ)
+		var data = JSON.parse_string(file.get_as_text())
+		print(data)
+		gui.settings(data)
+		file.close()

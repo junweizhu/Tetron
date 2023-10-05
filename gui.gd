@@ -60,7 +60,7 @@ func set_next_shape(shape: ShapeData):
 	clear_cells(next)
 	var i =0
 	for col in shape.coors.size():
-		for row in [0,1]:
+		for row in [1,0]:
 			if shape.grid[row][col]:
 				next.get_child(i).modulate=shape.color
 			i+=1
