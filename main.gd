@@ -20,6 +20,7 @@ var shape: ShapeData
 var next_shape: ShapeData
 var pos = 0
 var count=0
+var bonus = 0
 
 
 func _ready():
@@ -199,6 +200,10 @@ func update_high_score():
 	if gui.score>gui.high_score:
 		gui.high_score=gui.score
 
+func move_left():
+	if pos%cols<cols-1:
+		move_shape(pos+1)
+
 
 func _music(action):
 	if action ==PLAY:
@@ -216,3 +221,60 @@ func _music_is_on():
 	
 func _sound_is_on():
 	return gui.sound>gui.min_vol
+
+
+func _on_ticker_timeout():
+	var new_pos =pos+cols
+	if move_shape(new_pos):
+		gui.score+=bonus
+	else:
+		if new_pos<= END_POS:
+			_game_over()
+		else:
+			lock_shape_to_grid()
+			check_rows()
+			new_shape()
+
+func check_rows():
+	var i=grid.size()-1
+	var x=0
+	var rows=0
+	while i>=0:
+		if grid[i]:
+			x+=1
+			i-=1
+			if x==cols:
+				rows +=1
+				x=0
+		else:
+			i+=x
+			x=0
+			if rows>0:
+				remove_rows(i,rows)
+			rows=0
+			i-= cols
+
+
+func remove_rows(i, rows):
+	add_to_score(rows)
+	print("Rows: %d" % rows)
+	var num_cells = rows* cols
+	#hide cells
+	for n in num_cells:
+		gui.grid.get_child(i+n+1).modulate=Color(0)
+	pause()
+	await get_tree().create_timer(0.3).timeout
+	pause(false)
+	#move cells
+	var to=i+num_cells
+	while i>=0:
+		grid[to]=grid[i]
+		gui.grid.get_child(to).modulate=gui.grid.get_child(i).modulate
+		if i==0:
+			grid[i]=false
+			gui.grid.get_child(i).modulate=Color(0)
+		i -=1
+		to -=1
+
+func pause(value = true):
+	get_tree().pause = value

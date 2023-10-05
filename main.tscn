@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cocait7qpntde"]
+[gd_scene load_steps=4 format=3 uid="uid://cocait7qpntde"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_7q80q"]
 [ext_resource type="PackedScene" uid="uid://b5uofwc6kbl3i" path="res://gui.tscn" id="2_gkr4i"]
+[ext_resource type="AudioStream" uid="uid://dmdrmx6yq3vqe" path="res://Background_tune.ogg" id="2_obw67"]
 
 [node name="Main" type="CenterContainer"]
 offset_right = 600.0
@@ -9,8 +10,12 @@ offset_bottom = 1024.0
 script = ExtResource("1_7q80q")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_obw67")
 
 [node name="GUI" parent="." instance=ExtResource("2_gkr4i")]
 layout_mode = 2
 
 [node name="Ticker" type="Timer" parent="."]
+
+[connection signal="timeout" from="Ticker" to="." method="_on_ticker_timeout"]
